@@ -9,4 +9,5 @@ jobs:
     name: Notify when actions are done.
     runs-on: ubuntu-latest
     steps:
-      run: echo all job is done.
+      - name: Print status
+        run: echo "all job is done."
