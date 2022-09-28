@@ -1,0 +1,12 @@
+name: Exclude some branches of PR targets
+on:
+  pull_request:
+    branches-ignore:
+      - "previous-fork"
+
+jobs:
+  notify-job:
+    name: Notify when actions are done.
+    runs-on: ubuntu-latest
+    steps:
+      run: echo all job is done.
