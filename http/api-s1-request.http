@@ -1,0 +1,8 @@
+# curl https://api.stripe.com/v1/coupons/Z4OV52SU
+GET http://localhost:8080/api/s1/coupons/Z4OV52SU
+
+###
+
+GET http://localhost:8080/api/s1/coupons/list
+
+###
