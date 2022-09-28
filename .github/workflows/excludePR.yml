@@ -11,13 +11,13 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  notify-job:
-    name: Notify when actions are done.
+  deny-job:
+    name: Notify when excluded branches try to PR
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Runs a single command using the runners shell
-      - name: Print status
-        run: echo "all job is done."
+      - name: Exit with error
+        run: exit 1
