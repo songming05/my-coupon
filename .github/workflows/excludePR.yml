@@ -5,9 +5,9 @@ on:
       - "previous-fork"
 
 jobs:
-  notify-job:
-    name: Notify when actions are done.
+  deny-job:
+    name: Notify when excluded branches try to PR
     runs-on: ubuntu-latest
     steps:
-      - name: Print status
-        run: echo "all job is done."
+      - name: Exit with error
+        run: exit 1
