@@ -1,5 +1,7 @@
 package me.songming.coupon.application.service;
 
+import me.songming.coupon.common.SongCoupon;
+import me.songming.coupon.common.SongCouponId;
 import me.songming.coupon.repository.SongCouponEntity;
 import me.songming.coupon.repository.SongCouponRepository;
 import me.zilzu.mycoupon.MyCouponApplication;
@@ -17,28 +19,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = MyCouponApplication.class)
+//@SpringBootTest(classes = MyCouponApplication.class)
 class SongCouponServiceTest {
 
-    @Autowired
     SongCouponService songCouponService;
 
-    @Autowired
     SongCouponRepository songCouponRepository;
 
     @BeforeEach
     public void virtual_database_init() {
+        songCouponRepository = new SongCouponRepository();
+        songCouponService = new SongCouponService(songCouponRepository);
         for (int i = 0; i < 10; i++) {
-            songCouponRepository.save(String.valueOf(i));
+            songCouponRepository.save(new SongCouponId(String.valueOf(i)));
         }
     }
 
     @Test
     void retrieve_coupon_by_id() {
-        SongCouponEntity songCouponEntity = songCouponService.retrieve("1");
-        assertThat(songCouponEntity).isNotNull();
-        System.out.println("songCouponEntity = " + songCouponEntity);
-        assertThatThrownBy(() -> songCouponService.retrieve("99"))
+        SongCoupon songCoupon = songCouponService.retrieve(new SongCouponId("1"));
+        assertThat(songCoupon).isNotNull();
+        System.out.println("songCoupon = " + songCoupon);
+        assertThatThrownBy(() -> songCouponService.retrieve(new SongCouponId("99")))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

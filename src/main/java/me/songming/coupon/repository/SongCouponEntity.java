@@ -1,10 +1,12 @@
 package me.songming.coupon.repository;
 
+import me.songming.coupon.common.SongCouponId;
+
 public class SongCouponEntity {
     //JPA 고려
-    public String id;
+    public SongCouponId id;
 
-    public SongCouponEntity(String id) {
+    public SongCouponEntity(SongCouponId id) {
         this.id = id;
     }
 }
