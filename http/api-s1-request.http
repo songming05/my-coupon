@@ -3,6 +3,8 @@ GET http://localhost:8080/api/s1/coupons/Z4OV52SU
 
 ###
 
-GET http://localhost:8080/api/s1/coupons/list
+GET http://localhost:8080/api/s1/coupons
 
 ###
+
+GET http://localhost:8080/api/s1/coupons?limit=5

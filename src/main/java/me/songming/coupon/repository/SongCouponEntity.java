@@ -4,9 +4,15 @@ import me.songming.coupon.common.SongCouponId;
 
 public class SongCouponEntity {
     //JPA 고려
-    public SongCouponId id;
+    public final SongCouponId id;
+    public final int amountOff;
+    public final double percentOff;
+    public final boolean valid;
 
-    public SongCouponEntity(SongCouponId id) {
+    public SongCouponEntity(SongCouponId id, int amountOff, double percentOff, boolean valid) {
         this.id = id;
+        this.amountOff = amountOff;
+        this.percentOff = percentOff;
+        this.valid = valid;
     }
 }

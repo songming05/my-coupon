@@ -3,9 +3,12 @@ package me.songming.coupon.api.web;
 import me.songming.coupon.application.service.SongCouponService;
 import me.songming.coupon.common.SongCoupon;
 import me.songming.coupon.common.SongCouponId;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class SongCouponController {
@@ -24,12 +27,23 @@ public class SongCouponController {
     }
 
     @GetMapping("/api/s1/coupons")
-    public String retrieveCouponList() {
-        // limit
-        // 추후 페이지
-        // 유효기간, user id 조건 등
-        //return many coupons
+    public SongCouponRetrieveListResponse retrieveCouponList(HttpServletRequest request, @RequestParam(name = "limit", required = false)  String limit) {
+        String uri = request.getRequestURI();
+        limit = Optional.ofNullable(limit).orElse("20");
+        List<SongCoupon> couponList = songCouponService.retrieveList(limit);
 
-        return "coupon list";
+        // 페이지 작업 시
+        //boolean hasMore = songCouponService.retrieveNextListAvailable()
+
+        List<SongCouponRetrievedResult> retrievedResults = couponList.stream()
+                .map(SongCouponRetrievedResult::new)
+                .collect(Collectors.toList());
+        return new SongCouponRetrieveListResponse(uri, true, retrievedResults);
+    }
+
+    @PostMapping("/api/s1/coupons")
+    public void createCoupon() {
+        //SongCouponIdGenerator
+
     }
 }
