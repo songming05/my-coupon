@@ -26,9 +26,7 @@ public class SongCouponService {
     }
 
     public List<SongCoupon> retrieveList(SongCouponSearchCondition songCouponSearchCondition) {
-//        for (int i = 0; i < 45; i++) {
-//            songCouponRepository.save(new SongCouponId(SongCouponIdGenerator.randomIdGenerate()));
-//        }
+
         List<SongCouponEntity> songCouponEntityList =songCouponRepository.retrieveList(songCouponSearchCondition.limit);
         List<SongCoupon> songCouponList = songCouponEntityList.stream()
                 .map(entity -> new SongCoupon(entity.id, 0, 0.0, true))

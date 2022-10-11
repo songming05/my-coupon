@@ -35,12 +35,10 @@ public class SongCouponController {
         // 추후 페이지
         // 유효기간, user id 조건 등
         //return many coupons
-        String defaultLimit = Optional.ofNullable(limit).orElse("20");
-        boolean isNumeric = defaultLimit.matches("[0-9]+");
-        if(!isNumeric) throw new IllegalArgumentException("올바른 입력이 아닙니다.");
 
         SongCouponSearchCondition songCouponSearchCondition = new SongCouponSearchCondition(limit);
         List<SongCoupon> songCouponList = songCouponService.retrieveList(songCouponSearchCondition);
+
         SongCouponRetrievedListResult songCouponRetrievedListResult = new SongCouponRetrievedListResult(request.getRequestURI(),
                 true, songCouponList.stream()
                 .map(SongCouponRetrievedResult::new)
